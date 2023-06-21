@@ -19,6 +19,7 @@
                         <tr>
                             <th>Author</th>
                             <th>Book Name</th>
+                            <th>Category</th>
                             <th>Email</th>
                             <th>Phone</th>
                             <th>Actions</th>
@@ -29,6 +30,7 @@
                             <tr>
                                 <td>{{ $authors->author_name }}</td>
                                 <td>{{ $authors->book_name }}</td>
+                                <td class="{{ ($authors->category?->deleted_at) ? 'italic' : 'not-italic' }}">{{ $authors->category?->category_name }}</td>
                                 <td>{{ $authors->email }}</td>
                                 <td>{{ $authors->phone }}</td>
                                 <td>

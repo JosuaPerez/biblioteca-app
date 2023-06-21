@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Author;
+use App\Models\Category;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -22,7 +23,7 @@ class AuthorController extends Controller
      */
     public function create(): View
     {
-        return view('author.create');
+        return view('author.create')->with('categories', Category::all());
     }
 
     /**
@@ -41,6 +42,7 @@ class AuthorController extends Controller
         $author->book_name = $request->input('book_name');
         $author->email = $request->input('email');
         $author->phone = $request->input('phone');
+        $author->category_id = $request->input('category_id');
         $author->save();
 
         return redirect(route('author.index'));
@@ -59,7 +61,7 @@ class AuthorController extends Controller
      */
     public function edit(Author $author): View
     {
-        return view('author.edit')->with('author', $author);
+        return view('author.edit')->with(['author' => $author, 'categories' => Category::all()]);
     }
 
     /**
@@ -77,6 +79,8 @@ class AuthorController extends Controller
         $author->book_name = $request->input('book_name');
         $author->email = $request->input('email');
         $author->phone = $request->input('phone');
+        $author->category_id = $request->input('category_id');
+
         $author->save();
 
         return redirect(route('author.index'));
